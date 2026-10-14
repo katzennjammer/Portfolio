@@ -121,8 +121,8 @@ export const projects: Project[] = [
     ],
     tags: ["Expo", "React Native", "Next.js", "Prisma", "PostgreSQL", "Claude API"],
     links: [
-      { label: "Mobile app", href: "https://github.com/katzennjammer/baylo-app" },
-      { label: "API & admin", href: "https://github.com/katzennjammer/baylo-api" },
+      { label: "View app code", href: "https://github.com/katzennjammer/baylo-app" },
+      { label: "API code", href: "https://github.com/katzennjammer/baylo-api" },
     ],
     palette: ["#2f6b4f", "#cfe8a9"],
     image: "/work/baylo.webp",
@@ -159,7 +159,7 @@ export const projects: Project[] = [
       "AI price suggestions from the Gemini API",
     ],
     tags: ["React Native", "Expo", "TypeScript", "Supabase", "WebRTC"],
-    links: [{ label: "Source", href: "https://github.com/katzennjammer/SuotMobile" }],
+    links: [{ label: "View code", href: "https://github.com/katzennjammer/SuotMobile" }],
     palette: ["#4a635d", "#f1c7d6"],
   },
   {
@@ -175,7 +175,7 @@ export const projects: Project[] = [
       "Staff and admin authentication with full transaction records",
     ],
     tags: ["Laravel", "PHP", "MySQL", "Tailwind", "Alpine.js"],
-    links: [{ label: "Source", href: "https://github.com/katzennjammer/Medicare" }],
+    links: [{ label: "View code", href: "https://github.com/katzennjammer/Medicare" }],
     palette: ["#2d5d8a", "#bfe3f2"],
   },
 ];

@@ -232,57 +232,74 @@ export default function Home() {
             </section>
 
             {/* ───────── Work ───────── */}
-            <section id="work" className="mx-auto max-w-6xl px-5 pb-24 sm:px-8 sm:pb-32">
-              <SectionLabel n="02">Selected work</SectionLabel>
-              <div className="space-y-24 sm:space-y-32">
+            <section id="work" className="mx-auto max-w-7xl px-3 pt-24 pb-24 sm:px-6 sm:pt-32 sm:pb-32">
+              <div className="px-2 sm:px-4">
+                <SectionLabel n="02">Selected work</SectionLabel>
+                <Reveal>
+                  <h2 className="-mt-4 text-[clamp(2.6rem,6vw,4.75rem)] leading-none font-bold tracking-[-0.04em] sm:-mt-6">Featured projects</h2>
+                  <p className="mt-5 max-w-2xl text-lg leading-relaxed text-fg-2 sm:text-xl">
+                    Apps I&apos;ve designed, built and shipped, from a barter marketplace to a pharmacy kiosk.
+                  </p>
+                </Reveal>
+              </div>
+
+              <div className="mt-12 space-y-6 sm:mt-16 sm:space-y-8">
                 {projects.map((p, i) => (
-                  <Reveal as="article" key={p.name} className="group grid items-center gap-8 lg:grid-cols-12 lg:gap-12">
-                    <div className={`lg:col-span-7 ${i % 2 ? "lg:order-2" : ""}`}>
-                      <ProjectCover project={p} index={i} />
-                    </div>
-                    <div className={`lg:col-span-5 ${i % 2 ? "lg:order-1" : ""}`}>
-                      <div className="flex items-center gap-3 font-mono text-xs tracking-widest text-muted uppercase">
-                        <span className="text-accent">{String(i + 1).padStart(2, "0")}</span>
-                        <span>{p.kind}</span>
-                        <span>·</span>
+                  <Reveal
+                    as="article"
+                    key={p.name}
+                    className="group grid gap-8 rounded-[1.75rem] bg-[#121513] p-5 text-[#eef1ec] ring-1 ring-white/5 sm:rounded-[2.5rem] sm:p-8 lg:grid-cols-[1fr_1.15fr] lg:gap-12 lg:p-9 [:root[data-theme=dark]_&]:bg-[#1b2220]"
+                  >
+                    <div className="flex flex-col px-2 pt-2 sm:px-4 sm:pt-4">
+                      <div className="flex items-center justify-between text-lg text-white/55 tabular-nums">
+                        <span>
+                          {String(i + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}
+                        </span>
                         <span>{p.year}</span>
                       </div>
-                      <h3 className="mt-4 text-4xl font-semibold tracking-tight sm:text-5xl">{p.name}</h3>
-                      <p className="mt-4 text-lg leading-relaxed text-fg-2">{p.description}</p>
-                      <ul className="mt-6 space-y-2.5">
-                        {p.highlights.map((h) => (
-                          <li key={h} className="flex gap-3 text-[15px] leading-relaxed text-fg-2">
-                            <span className="mt-2.5 size-1.5 shrink-0 rounded-full bg-accent" />
-                            {h}
-                          </li>
-                        ))}
-                      </ul>
-                      <div className="mt-6 flex flex-wrap gap-2">
-                        {p.tags.map((t) => (
-                          <span key={t} className="rounded-full border border-line-strong px-3 py-1 text-xs font-medium text-fg-2">
-                            {t}
-                          </span>
-                        ))}
+
+                      <div className="mt-10 lg:mt-auto">
+                        <div className="font-mono text-xs tracking-widest text-[#7fd6af] uppercase">{p.kind}</div>
+                        <h3 className="mt-3 text-[clamp(2.4rem,5vw,4rem)] leading-none font-bold tracking-[-0.04em]">{p.name}</h3>
+                        <p className="mt-5 max-w-lg text-lg leading-relaxed text-white/75">{p.description}</p>
+                        <div className="mt-6 flex flex-wrap gap-2">
+                          {p.tags.map((t) => (
+                            <span key={t} className="rounded-full border border-white/20 px-3.5 py-1.5 text-sm text-white/85">
+                              {t}
+                            </span>
+                          ))}
+                        </div>
                       </div>
-                      {p.links.length > 0 ? (
-                        <div className="mt-7 flex flex-wrap gap-5">
-                          {p.links.map((l) => (
+
+                      <div className="mt-8 flex flex-wrap gap-3 pb-2 lg:mb-auto">
+                        {p.links.length > 0 ? (
+                          p.links.map((l, j) => (
                             <a
                               key={l.href}
                               href={l.href}
                               target="_blank"
                               rel="noreferrer"
-                              className="group/link inline-flex items-center gap-1.5 border-b border-fg pb-0.5 font-medium"
+                              className={`group/link inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-lg font-medium transition-transform hover:-translate-y-0.5 ${
+                                j === 0 ? "bg-white text-[#121513]" : "border border-white/25 text-white hover:bg-white/10"
+                              }`}
                             >
                               {l.label}
                               <Arrow className="transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
                             </a>
-                          ))}
-                        </div>
-                      ) : (
-                        <p className="mt-7 text-sm text-muted">Private client work. Happy to walk you through it.</p>
-                      )}
+                          ))
+                        ) : (
+                          <span className="inline-flex items-center gap-2 rounded-full border border-white/20 px-5 py-3 text-white/70">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                              <rect x="5" y="11" width="14" height="9" rx="2" />
+                              <path d="M8 11V8a4 4 0 0 1 8 0v3" />
+                            </svg>
+                            Private client work, happy to walk you through it
+                          </span>
+                        )}
+                      </div>
                     </div>
+
+                    <ProjectCover project={p} />
                   </Reveal>
                 ))}
               </div>

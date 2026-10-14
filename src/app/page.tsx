@@ -1,4 +1,5 @@
-import { about, building, experience, githubUser, inquiries, profile, projects, socials } from "@/content";
+import { about, building, contact, experience, githubUser, profile, projects, socials } from "@/content";
+import { ContactChat } from "@/components/ContactChat";
 import { CopyEmail } from "@/components/CopyEmail";
 import { GitHubActivity } from "@/components/GitHubActivity";
 import { Laptop, Phone } from "@/components/Devices";
@@ -386,90 +387,64 @@ export default function Home() {
             </section>
 
             {/* ───────── Contact ───────── */}
-            <section id="contact" className="bg-fg text-bg">
-              <div className="mx-auto max-w-6xl px-5 py-24 sm:px-8 sm:py-32">
-                <div className="mb-10 text-sm font-medium tracking-[0.2em] uppercase opacity-60 sm:mb-14">Contact</div>
+            <section id="contact" className="mx-auto max-w-7xl px-5 pb-20 sm:px-10 sm:pb-28">
+              <div className="grid items-center gap-12 lg:grid-cols-[1fr_1.05fr] lg:gap-16">
                 <Reveal>
-                  <h2 className="text-[clamp(3rem,9vw,7.5rem)] leading-[0.9] font-bold tracking-[-0.04em]">
+                  <SectionLabel>Contact</SectionLabel>
+                  <h2 className="-mt-2 text-[clamp(3.4rem,8vw,7rem)] leading-[0.92] font-bold tracking-[-0.05em]">
                     Let&apos;s build
                     <br />
-                    <span className="font-serif font-normal text-mark italic">something good.</span>
+                    something
+                    <br />
+                    good<span className="text-accent">.</span>
                   </h2>
-                </Reveal>
-
-                <div className="mt-14 grid gap-10 lg:grid-cols-[1.4fr_1fr]">
-                  <Reveal>
+                  <p className="mt-7 max-w-md text-lg leading-relaxed text-fg-2 sm:text-xl">{contact.subtitle}</p>
+                  <div className="mt-9 flex flex-wrap items-center gap-3">
                     <a
                       href={`mailto:${profile.email}`}
-                      className="block text-2xl font-semibold tracking-tight break-all underline decoration-bg/30 decoration-2 underline-offset-8 transition-colors hover:decoration-mark sm:text-4xl"
+                      className="inline-flex max-w-full items-center rounded-full bg-fg px-7 py-4 text-lg font-medium break-all text-bg shadow-[0_14px_30px_-14px_rgb(0_0_0/0.5)] transition-transform hover:-translate-y-0.5"
                     >
                       {profile.email}
                     </a>
-                    <div className="mt-6 [&_button]:border-bg/30 [&_button:hover]:bg-bg [&_button:hover]:text-fg">
-                      <CopyEmail email={profile.email} />
-                    </div>
+                    <CopyEmail email={profile.email} />
+                  </div>
+                </Reveal>
 
-                    <h3 className="mt-12 mb-4 text-sm opacity-60">Or start with one of these:</h3>
-                    <div className="flex flex-wrap gap-2.5">
-                      {inquiries.map((q) => (
-                        <a
-                          key={q.label}
-                          href={`mailto:${profile.email}?subject=${encodeURIComponent(q.subject)}&body=${encodeURIComponent(q.body)}`}
-                          className="rounded-full border border-bg/25 px-4 py-2.5 text-sm font-medium transition-colors hover:border-mark hover:bg-mark hover:text-[#16150f]"
-                        >
-                          {q.label}
-                        </a>
-                      ))}
-                    </div>
-                  </Reveal>
-
-                  <Reveal delay={120}>
-                    <div className="rounded-3xl border border-bg/15 p-7">
-                      <div className="font-mono text-xs tracking-widest uppercase opacity-60">Local time</div>
-                      <div className="mt-2 text-4xl font-semibold tracking-tight">
-                        <LocalTime timeZone={profile.timeZone} withSeconds />
-                      </div>
-                      <div className="mt-1 text-sm opacity-60">
-                        {profile.location} · {profile.timeZoneLabel}
-                      </div>
-                      <div className="mt-8 font-mono text-xs tracking-widest uppercase opacity-60">Elsewhere</div>
-                      <ul className="mt-3 space-y-1">
-                        {socials.map((s) => (
-                          <li key={s.kind}>
-                            <a
-                              href={s.href}
-                              target="_blank"
-                              rel="noreferrer"
-                              className="group flex items-center justify-between border-b border-bg/15 py-3 transition-colors hover:text-mark"
-                            >
-                              <span className="flex items-center gap-3">
-                                <SocialIcon kind={s.kind} />
-                                {s.label}
-                              </span>
-                              <Arrow className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                            </a>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </Reveal>
-                </div>
+                <Reveal delay={120}>
+                  <ContactChat />
+                </Reveal>
               </div>
-
-              <footer className="border-t border-bg/15">
-                <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-5 py-8 text-sm opacity-70 sm:px-8">
-                  <span>
-                    © {new Date().getFullYear()} {profile.name}
-                  </span>
-                  <a href="#top" className="inline-flex items-center gap-2 hover:text-mark">
-                    Back to top
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                      <path d="M12 19V5M5 12l7-7 7 7" />
-                    </svg>
-                  </a>
-                </div>
-              </footer>
             </section>
+
+            <footer className="border-t border-line">
+              <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-5 px-5 py-8 text-sm text-muted sm:px-10">
+                <span>
+                  © {new Date().getFullYear()} {profile.name}
+                </span>
+                <ul className="flex gap-2">
+                  {socials.map((s) => (
+                    <li key={s.kind}>
+                      <a
+                        href={s.href}
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label={s.label}
+                        title={s.label}
+                        className="grid size-10 place-items-center rounded-full border border-line-strong text-fg-2 transition-colors hover:bg-fg hover:text-bg"
+                      >
+                        <SocialIcon kind={s.kind} size={17} />
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+                <a href="#top" className="inline-flex items-center gap-2 hover:text-fg">
+                  Back to top
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <path d="M12 19V5M5 12l7-7 7 7" />
+                  </svg>
+                </a>
+              </div>
+            </footer>
           </main>
         </div>
       </div>

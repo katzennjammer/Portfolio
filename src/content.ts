@@ -244,9 +244,49 @@ export const skills = [
   "Figma",
 ] as const;
 
+/** Quick replies in the contact chat. Each opens an email with this subject and body. */
 export const inquiries = [
-  { label: "Freelance project", subject: "Project inquiry", body: "Hi Jamaica,\n\nI have a project in mind:\n\n" },
-  { label: "Job or internship", subject: "Opportunity", body: "Hi Jamaica,\n\nWe have a role you might like:\n\n" },
-  { label: "Collaboration", subject: "Let's collaborate", body: "Hi Jamaica,\n\nI'd love to build something together:\n\n" },
-  { label: "Just saying hi", subject: "Hello!", body: "Hi Jamaica,\n\n" },
+  {
+    emoji: "🌐",
+    label: "A website",
+    subject: "Website project",
+    body: "Hi Jamaica,\n\nI'd like to build a website:\n\n",
+    reply: "Love it. Your email app should be open now. Tell me what the site is for and when you'd like it live.",
+  },
+  {
+    emoji: "📱",
+    label: "A mobile app",
+    subject: "Mobile app project",
+    body: "Hi Jamaica,\n\nI have an idea for a mobile app:\n\n",
+    reply: "My favourite kind! Your email app should be open. Share the idea and who it's for.",
+  },
+  {
+    emoji: "🎨",
+    label: "UI/UX design",
+    subject: "Design project",
+    body: "Hi Jamaica,\n\nI need help with design:\n\n",
+    reply: "Let's make it look good and work well. Your email app should be open, so send me what you have so far.",
+  },
+  {
+    emoji: "💼",
+    label: "A job or internship",
+    subject: "Opportunity",
+    body: "Hi Jamaica,\n\nWe have a role you might like:\n\n",
+    reply: "Thank you for thinking of me! Your email app should be open. I'll reply as soon as I can.",
+  },
+  {
+    emoji: "👋",
+    label: "Just saying hi",
+    subject: "Hello!",
+    body: "Hi Jamaica,\n\n",
+    reply: "Hi back! Your email app should be open. I'd love to hear from you.",
+  },
 ];
+
+/** Contact section copy. */
+export const contact = {
+  subtitle: "Got an app idea, a role to fill or a design that needs building? Send it my way.",
+  greeting: "Hi there! 👋 What are you working on? Pick one below or type me a message.",
+  typedReply: "Got it! Your email app should be open with your message, just hit send. ✉️",
+  typedSubject: "Hello from your portfolio",
+};

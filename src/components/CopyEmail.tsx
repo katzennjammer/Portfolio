@@ -19,7 +19,7 @@ export function CopyEmail({ email }: { email: string }) {
     <button
       type="button"
       onClick={copy}
-      className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-line-strong px-4 py-2 text-sm font-medium transition-colors hover:bg-fg hover:text-bg"
+      className="inline-flex cursor-pointer items-center gap-2.5 rounded-full border border-line-strong px-7 py-4 text-lg font-medium transition-colors hover:bg-fg hover:text-bg"
     >
       {copied ? (
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">

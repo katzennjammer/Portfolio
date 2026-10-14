@@ -198,11 +198,11 @@ export const projects: Project[] = [
     tags: ["Laravel", "PHP", "MySQL", "Tailwind", "Alpine.js"],
     links: [{ label: "View code", href: "https://github.com/katzennjammer/Medicare" }],
     palette: ["#2d5d8a", "#bfe3f2"],
-    image: "/work/medicare-catalog.webp",
+    image: "/work/medicare-queue.webp",
     device: "browsers",
     extraImages: [
+      { src: "/work/medicare-catalog.webp", alt: "Medicare medicine catalog" },
       { src: "/work/medicare-login.webp", alt: "Medicare staff login" },
-      { src: "/work/medicare-queue.webp", alt: "Medicare live queue display" },
     ],
   },
 ];

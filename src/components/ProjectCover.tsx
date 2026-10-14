@@ -20,19 +20,41 @@ export function ProjectCover({ project }: { project: Project }) {
         project.device === "phones" && project.extraImages ? (
           <div className="relative h-full w-full">
             <Phone
-              src={project.extraImages[0]}
-              alt={`${project.name}: safe meetup hubs map`}
+              src={project.extraImages[0].src}
+              alt={project.extraImages[0].alt}
               className="absolute top-[24%] left-[13%] w-[27%] rotate-[-9deg] transition-transform duration-700 group-hover:-translate-x-2 group-hover:rotate-[-12deg]"
             />
             <Phone
-              src={project.extraImages[1]}
-              alt={`${project.name}: trades in progress`}
+              src={project.extraImages[1].src}
+              alt={project.extraImages[1].alt}
               className="absolute top-[24%] right-[13%] w-[27%] rotate-[9deg] transition-transform duration-700 group-hover:translate-x-2 group-hover:rotate-[12deg]"
             />
             <Phone
               src={project.image}
               alt={`${project.name}: home feed`}
               className="absolute top-[12%] left-1/2 z-[1] w-[31%] -translate-x-1/2 transition-transform duration-700 group-hover:-translate-y-3"
+            />
+          </div>
+        ) : project.device === "browsers" && project.extraImages ? (
+          // Main screenshot large at the back, the other two layered over its lower corners.
+          <div className="relative h-full w-full">
+            <BrowserWindow
+              src={project.image}
+              alt={`${project.name} screenshot`}
+              url={project.name}
+              className="absolute top-[7%] left-[5%] w-[70%] transition-transform duration-700 group-hover:-translate-y-1"
+            />
+            <BrowserWindow
+              src={project.extraImages[0].src}
+              alt={project.extraImages[0].alt}
+              url={project.name}
+              className="absolute top-[36%] right-[4%] z-[1] w-[50%] transition-transform duration-700 group-hover:translate-x-1 group-hover:-translate-y-1"
+            />
+            <BrowserWindow
+              src={project.extraImages[1].src}
+              alt={project.extraImages[1].alt}
+              url={project.name}
+              className="absolute bottom-[6%] left-[9%] z-[2] w-[40%] transition-transform duration-700 group-hover:-translate-x-1 group-hover:translate-y-1"
             />
           </div>
         ) : project.device === "phone" ? (

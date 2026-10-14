@@ -94,6 +94,8 @@ export const services = [
   },
 ];
 
+export type Shot = { src: string; alt: string };
+
 export type Project = {
   name: string;
   year: string;
@@ -107,10 +109,13 @@ export type Project = {
   palette: [string, string];
   /** Screenshot in public/work/. Without one the project gets generated cover art. */
   image?: string;
-  /** Frame the screenshot sits in. "phones" fans out three phones: side screens from `extraImages`. */
-  device?: "phone" | "phones" | "browser";
-  /** For "phones": [left, right] screenshots shown tilted behind the main one. */
-  extraImages?: [string, string];
+  /**
+   * Frame the screenshot sits in. "phones" fans out three phones and
+   * "browsers" stacks three windows, using `extraImages` for the two behind.
+   */
+  device?: "phone" | "phones" | "browser" | "browsers";
+  /** For "phones" / "browsers": the two screenshots shown behind the main one. */
+  extraImages?: [Shot, Shot];
 };
 
 export const projects: Project[] = [
@@ -134,7 +139,10 @@ export const projects: Project[] = [
     palette: ["#2f6b4f", "#cfe8a9"],
     image: "/work/baylo.webp",
     device: "phones",
-    extraImages: ["/work/baylo-hubs.webp", "/work/baylo-trades.webp"],
+    extraImages: [
+      { src: "/work/baylo-hubs.webp", alt: "Baylo safe meetup hubs map" },
+      { src: "/work/baylo-trades.webp", alt: "Baylo trades in progress" },
+    ],
   },
   {
     name: "Sunward",
@@ -190,6 +198,12 @@ export const projects: Project[] = [
     tags: ["Laravel", "PHP", "MySQL", "Tailwind", "Alpine.js"],
     links: [{ label: "View code", href: "https://github.com/katzennjammer/Medicare" }],
     palette: ["#2d5d8a", "#bfe3f2"],
+    image: "/work/medicare-catalog.webp",
+    device: "browsers",
+    extraImages: [
+      { src: "/work/medicare-queue.webp", alt: "Medicare live queue display" },
+      { src: "/work/medicare-login.webp", alt: "Medicare staff login" },
+    ],
   },
 ];
 

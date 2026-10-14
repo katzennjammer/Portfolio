@@ -55,26 +55,37 @@ export const socials: { kind: SocialKind; label: string; href: string }[] = [
 /** GitHub username for the contribution chart. */
 export const githubUser = "katzennjammer";
 
+/** Tabs under the "What I do" statement. */
 export const services = [
   {
-    title: "Web apps",
-    body: "Fast, accessible sites and dashboards, from landing pages to full products with accounts and admin tools.",
+    title: "Web",
+    body: "Fast, accessible sites and dashboards, from landing pages to full products with accounts, search and admin tools.",
     tools: ["Next.js", "React", "Laravel", "Tailwind"],
+    example: "Sunward, Medicare",
   },
   {
-    title: "Mobile apps",
-    body: "Android and iOS apps from one codebase, with maps, cameras, real-time chat and offline-friendly data.",
+    title: "Mobile",
+    body: "Android and iOS apps from one codebase, with maps, cameras, real-time chat, video calls and offline-friendly data.",
     tools: ["React Native", "Expo", "TypeScript"],
+    example: "Baylo, Suot Mobile",
   },
   {
-    title: "Backend & data",
-    body: "APIs, databases and the rules that keep them honest: auth, verification, audit trails and ledgers.",
+    title: "Backend & APIs",
+    body: "APIs, databases and the rules that keep them honest: auth, ID verification, audit trails and ledgers that always add up.",
     tools: ["PostgreSQL", "Prisma", "Supabase", "MySQL"],
+    example: "Baylo API, Sunward accounts",
   },
   {
-    title: "Interfaces & motion",
+    title: "UI & Motion",
     body: "Interfaces that feel considered, with light and dark themes, careful motion and the occasional 3D scene.",
-    tools: ["Three.js", "R3F", "CSS"],
+    tools: ["Tailwind", "Three.js", "R3F", "CSS"],
+    example: "Sunward's 3D views",
+  },
+  {
+    title: "AI Features",
+    body: "Practical AI inside real apps, like reading a listing photo or suggesting a fair price, with a person always confirming the result.",
+    tools: ["Claude API", "Gemini API"],
+    example: "Baylo photo tagging, Suot pricing",
   },
 ];
 

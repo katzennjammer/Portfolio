@@ -1,4 +1,4 @@
-import { about, building, experience, githubUser, inquiries, profile, projects, services, skills, socials } from "@/content";
+import { about, building, experience, githubUser, inquiries, profile, projects, skills, socials } from "@/content";
 import { CopyEmail } from "@/components/CopyEmail";
 import { GitHubActivity } from "@/components/GitHubActivity";
 import { Laptop, Phone } from "@/components/Devices";
@@ -8,6 +8,7 @@ import { LocalTime } from "@/components/LocalTime";
 import { ProjectCover } from "@/components/ProjectCover";
 import { Reveal } from "@/components/Reveal";
 import { SkillIcon } from "@/components/SkillIcon";
+import { ServiceTabs } from "@/components/ServiceTabs";
 import { ShipCard } from "@/components/ShipCard";
 import { SocialIcon } from "@/components/SocialIcon";
 
@@ -20,6 +21,30 @@ function SectionLabel({ n, children }: { n: string; children: React.ReactNode })
       <span className="h-px w-10 bg-line-strong" />
       <span>{children}</span>
     </div>
+  );
+}
+
+const chips = {
+  sketch: { bg: "#e9a93a", d: "M4 20l4-1 10-10-3-3L5 16zM13.5 6.5l3 3" },
+  code: { bg: "#c2502a", d: "M9 8l-4 4 4 4M15 8l4 4-4 4" },
+  data: { bg: "#1f6a52", d: "M12 4c4 0 7 1.3 7 3s-3 3-7 3-7-1.3-7-3 3-3 7-3zM5 7v10c0 1.7 3 3 7 3s7-1.3 7-3V7M5 12c0 1.7 3 3 7 3s7-1.3 7-3" },
+  phone: { bg: "#3d6fb4", d: "M8 3h8a1.5 1.5 0 0 1 1.5 1.5v15A1.5 1.5 0 0 1 16 21H8a1.5 1.5 0 0 1-1.5-1.5v-15A1.5 1.5 0 0 1 8 3zM11 18h2" },
+};
+
+/** Inline icon tile used inside the "What I do" sentence. */
+function Chip({ kind }: { kind: keyof typeof chips }) {
+  const c = chips[kind];
+  const tilt = { sketch: "-rotate-6", code: "rotate-3", data: "-rotate-3", phone: "rotate-6" }[kind];
+  return (
+    <span
+      className={`mx-[0.06em] inline-grid size-[0.9em] place-items-center rounded-[0.26em] align-[-0.12em] text-white shadow-[0_8px_16px_-8px_rgb(0_0_0/0.5)] transition-transform hover:rotate-0 ${tilt}`}
+      style={{ background: c.bg }}
+      aria-hidden="true"
+    >
+      <svg width="55%" height="55%" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+        <path d={c.d} />
+      </svg>
+    </span>
   );
 }
 
@@ -190,32 +215,20 @@ export default function Home() {
             </div>
 
             {/* ───────── What I do ───────── */}
-            <section className="mx-auto max-w-6xl px-5 py-24 sm:px-8 sm:py-32">
-              <SectionLabel n="01">What I do</SectionLabel>
-              <Reveal>
-                <h2 className="max-w-3xl text-4xl leading-[1.05] font-semibold tracking-tight sm:text-6xl">
-                  From the first sketch to the database underneath,{" "}
-                  <span className="font-serif font-normal text-accent italic">end to end.</span>
-                </h2>
-              </Reveal>
-              <div className="mt-14 grid gap-px overflow-hidden rounded-3xl border border-line bg-line sm:grid-cols-2">
-                {services.map((s, i) => (
-                  <Reveal key={s.title} delay={i * 80} className="group bg-surface p-7 transition-colors hover:bg-bg-2 sm:p-9">
-                    <div className="flex items-start justify-between">
-                      <h3 className="text-2xl font-semibold tracking-tight">{s.title}</h3>
-                      <span className="font-mono text-xs text-muted">0{i + 1}</span>
-                    </div>
-                    <p className="mt-3 max-w-sm leading-relaxed text-fg-2">{s.body}</p>
-                    <div className="mt-6 flex flex-wrap gap-2">
-                      {s.tools.map((t) => (
-                        <span key={t} className="rounded-full bg-accent-soft px-3 py-1 text-xs font-medium text-accent">
-                          {t}
-                        </span>
-                      ))}
-                    </div>
-                  </Reveal>
-                ))}
+            <section className="pt-24 sm:pt-32">
+              <div className="mx-auto max-w-7xl px-5 sm:px-10">
+                <SectionLabel n="01">What I do</SectionLabel>
+                <Reveal>
+                  <h2 className="max-w-6xl text-[clamp(2.1rem,5vw,4.4rem)] leading-[1.18] font-medium tracking-[-0.03em]">
+                    I like owning the whole thing. I <Chip kind="sketch" /> sketch the flow, <Chip kind="code" /> write the code,{" "}
+                    <Chip kind="data" /> wire up the data and <Chip kind="phone" /> put it in people&apos;s hands. One builder, start to
+                    finish. <span className="marker">Apps people actually trust.</span>
+                  </h2>
+                </Reveal>
               </div>
+              <Reveal className="mt-16 sm:mt-20">
+                <ServiceTabs />
+              </Reveal>
             </section>
 
             {/* ───────── Work ───────── */}

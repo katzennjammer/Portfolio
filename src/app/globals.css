@@ -113,6 +113,10 @@ body::before {
   padding: 0 0.08em;
   color: #16150f;
 }
+/* On dark backgrounds the band covers the whole word so the dark text stays readable. */
+:root[data-theme="dark"] .marker {
+  background: linear-gradient(transparent 10%, var(--mark) 10%, var(--mark) 92%, transparent 92%);
+}
 
 /* Scroll reveal: only hides content when JS is running (html.js). */
 .js .reveal {

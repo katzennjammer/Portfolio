@@ -10,7 +10,7 @@ export function ServiceTabs() {
 
   return (
     <div>
-      <div role="tablist" aria-label="What I do" className="grid grid-cols-2 border-y border-line sm:grid-cols-3 lg:grid-cols-5">
+      <div role="tablist" aria-label="What I do" className="grid grid-cols-2 border-y border-line sm:grid-cols-3 lg:grid-cols-6">
         {services.map((item, i) => {
           const selected = i === active;
           return (
@@ -22,9 +22,9 @@ export function ServiceTabs() {
               aria-selected={selected}
               aria-controls="service-panel"
               onClick={() => setActive(i)}
-              className={`relative cursor-pointer border-line px-4 py-7 text-center text-xl tracking-tight transition-colors max-lg:border-b max-sm:last:col-span-2 sm:text-2xl lg:border-r lg:last:border-r-0 ${
+              className={`relative cursor-pointer border-line px-3 py-7 text-center text-lg tracking-tight transition-colors max-lg:border-b sm:text-xl lg:border-r xl:text-2xl lg:last:border-r-0 ${
                 selected ? "bg-fg text-bg" : "hover:bg-bg-2"
-              } ${i % 2 === 0 && i < services.length - 1 ? "max-sm:border-r" : ""} ${i % 3 !== 2 ? "sm:max-lg:border-r" : ""}`}
+              } ${i % 2 === 0 ? "max-sm:border-r" : ""} ${i % 3 !== 2 ? "sm:max-lg:border-r" : ""}`}
             >
               {item.title}
             </button>

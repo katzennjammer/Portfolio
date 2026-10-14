@@ -1,4 +1,4 @@
-import { about, building, experience, githubUser, inquiries, profile, projects, skills, socials } from "@/content";
+import { about, building, experience, githubUser, inquiries, profile, projects, socials } from "@/content";
 import { CopyEmail } from "@/components/CopyEmail";
 import { GitHubActivity } from "@/components/GitHubActivity";
 import { Laptop, Phone } from "@/components/Devices";
@@ -7,7 +7,7 @@ import { Loader } from "@/components/Loader";
 import { LocalTime } from "@/components/LocalTime";
 import { ProjectCover } from "@/components/ProjectCover";
 import { Reveal } from "@/components/Reveal";
-import { SkillIcon } from "@/components/SkillIcon";
+import { SkillOrbit } from "@/components/SkillOrbit";
 import { ServiceTabs } from "@/components/ServiceTabs";
 import { ShipCard } from "@/components/ShipCard";
 import { SocialIcon } from "@/components/SocialIcon";
@@ -56,6 +56,21 @@ function ProjectMark({ icon }: { icon: "leaf" | "sun" }) {
         <path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8" />
       </svg>
     </span>
+  );
+}
+
+/** Line icons for the About facts. */
+function FactIcon({ icon }: { icon: (typeof about.facts)[number]["icon"] }) {
+  const paths = {
+    briefcase: "M4 8h16v11H4zM9 8V5.5A1.5 1.5 0 0 1 10.5 4h3A1.5 1.5 0 0 1 15 5.5V8M4 13h16",
+    screen: "M3.5 5h17v11h-17zM9 20h6M12 16v4",
+    pin: "M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11zM12 12.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z",
+    send: "M21 3L10 14M21 3l-7 18-4-7-7-4z",
+  };
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d={paths[icon]} />
+    </svg>
   );
 }
 
@@ -337,42 +352,36 @@ export default function Home() {
             </section>
 
             {/* ───────── About ───────── */}
-            <section id="about" className="mx-auto max-w-6xl px-5 pb-24 sm:px-8 sm:pb-32">
-              <SectionLabel>About me</SectionLabel>
-              <div className="grid gap-14 lg:grid-cols-[1.3fr_1fr]">
-                <Reveal>
-                  <p className="text-2xl leading-snug font-medium tracking-tight sm:text-3xl">{about.paragraphs[0]}</p>
-                  {about.paragraphs.slice(1).map((p) => (
-                    <p key={p} className="mt-6 text-lg leading-relaxed text-fg-2">
-                      {p}
-                    </p>
-                  ))}
-                </Reveal>
-                <Reveal delay={120}>
-                  <dl className="divide-y divide-line rounded-3xl border border-line bg-surface">
-                    {about.facts.map((f) => (
-                      <div key={f.label} className="flex items-baseline justify-between gap-6 px-6 py-4">
-                        <dt className="text-sm text-muted">{f.label}</dt>
-                        <dd className="text-right font-medium">{f.value}</dd>
-                      </div>
-                    ))}
-                  </dl>
-                </Reveal>
-              </div>
+            <section id="about" className="mx-auto max-w-7xl px-3 pb-24 sm:px-6 sm:pb-32">
+              <Reveal className="grid items-center gap-12 overflow-hidden rounded-[1.75rem] border border-line bg-bg-2 px-6 py-12 sm:rounded-[2.5rem] sm:px-12 sm:py-16 lg:grid-cols-[1fr_1.05fr] lg:gap-6 lg:py-20">
+                <div>
+                  <SectionLabel>About me</SectionLabel>
+                  <h2 className="-mt-4 max-w-xl text-[clamp(2.4rem,4.6vw,3.9rem)] leading-[1.02] font-bold tracking-[-0.04em] sm:-mt-6">
+                    {about.heading}
+                  </h2>
+                  <p className="mt-7 max-w-xl text-lg leading-relaxed text-fg-2">{about.bio}</p>
 
-              <Reveal className="mt-16">
-                <h3 className="mb-6 font-mono text-xs tracking-widest text-muted uppercase">Tools & languages</h3>
-                <ul className="grid grid-cols-3 gap-3 sm:grid-cols-6 lg:grid-cols-9">
-                  {skills.map((s) => (
-                    <li
-                      key={s}
-                      className="group flex aspect-square flex-col items-center justify-center gap-3 rounded-2xl border border-line bg-surface p-3 text-center text-fg-2 transition-[transform,border-color] hover:-translate-y-1 hover:border-line-strong"
-                    >
-                      <SkillIcon name={s} />
-                      <span className="text-xs font-medium">{s}</span>
-                    </li>
-                  ))}
-                </ul>
+                  <ul className="mt-10 grid max-w-xl gap-x-8 gap-y-6 sm:grid-cols-2">
+                    {about.facts.map((f) => (
+                      <li key={f.text} className="flex items-start gap-3.5 text-[17px] leading-snug">
+                        <span className="mt-0.5 text-muted">
+                          <FactIcon icon={f.icon} />
+                        </span>
+                        {f.text}
+                      </li>
+                    ))}
+                  </ul>
+
+                  <a
+                    href="#contact"
+                    className="mt-11 inline-flex items-center gap-2.5 rounded-full bg-fg px-7 py-4 text-lg font-medium text-bg shadow-[0_14px_30px_-14px_rgb(0_0_0/0.5)] transition-transform hover:-translate-y-0.5"
+                  >
+                    Let&apos;s work together
+                    <Arrow />
+                  </a>
+                </div>
+
+                <SkillOrbit />
               </Reveal>
             </section>
 

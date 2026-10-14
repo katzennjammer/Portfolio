@@ -6,7 +6,7 @@
 export const profile = {
   name: "Jamaica Mae Jumuad",
   firstName: "Jamaica",
-  role: "Full-stack & mobile developer",
+  role: "Designer & full-stack developer",
   location: "Cebu, Philippines",
   timeZone: "Asia/Manila",
   timeZoneLabel: "GMT+8",
@@ -22,7 +22,7 @@ export const profile = {
   intro:
     "I build web and mobile apps for communities, the kind where strangers need a good reason to trust each other.",
   /** The big line under your name. */
-  headline: "Full-stack developer building web and mobile apps that real communities use, from the screen to the database.",
+  headline: "Designer and full-stack developer building web and mobile apps that real communities use, from the first sketch to the database.",
 };
 
 /** "Currently building …" line in the hero. */
@@ -70,14 +70,20 @@ export const services = [
     example: "Baylo, Suot Mobile",
   },
   {
+    title: "UI/UX Design",
+    body: "Flows, wireframes and polished screens in Figma, then built exactly as designed, because I design the screens I build.",
+    tools: ["Figma", "Design systems", "Prototyping"],
+    example: "Baylo's login and home feed redesign",
+  },
+  {
     title: "Backend & APIs",
     body: "APIs, databases and the rules that keep them honest: auth, ID verification, audit trails and ledgers that always add up.",
     tools: ["PostgreSQL", "Prisma", "Supabase", "MySQL"],
     example: "Baylo API, Sunward accounts",
   },
   {
-    title: "UI & Motion",
-    body: "Interfaces that feel considered, with light and dark themes, careful motion and the occasional 3D scene.",
+    title: "Motion & 3D",
+    body: "Interfaces that feel alive, with light and dark themes, careful motion and the occasional interactive 3D scene.",
     tools: ["Tailwind", "Three.js", "R3F", "CSS"],
     example: "Sunward's 3D views",
   },
@@ -205,17 +211,14 @@ export const experience = [
 ];
 
 export const about = {
-  paragraphs: [
-    "I'm Jamaica, a BS Information Technology student at the University of Cebu Lapu-Lapu and Mandaue, and a developer who likes building things people use in their own neighbourhood.",
-    "Most of what I've made is about people exchanging things fairly: Baylo, a barter marketplace with no money in it; Suot, a clothing-swap app; and Medicare, a pharmacy kiosk with a live queue. My favourite parts are the ones that make an app trustworthy, like ID checks, confirmation codes, audit trails and numbers that always add up.",
-    "I work across the stack: React Native and Expo on mobile, Next.js and Laravel on the web, and Postgres or Supabase underneath. Lately I've been building Sunward for a client, which pushed me into 3D with React Three Fiber.",
-  ],
+  heading: "I design it, then I build it right.",
+  bio: "Hi! I'm Jamaica, a BS Information Technology student at the University of Cebu Lapu-Lapu and Mandaue. I like owning an app from the first sketch in Figma to launch day: I design the screens, build them in React Native or Next.js, and wire up the data with Laravel, Postgres or Supabase. So far that's a barter marketplace, a clothing-swap app, a pharmacy kiosk and a client site with 3D views. My favourite parts are the ones that make people trust an app, like ID checks, confirmation codes and numbers that always add up.",
   facts: [
-    { label: "Based in", value: "Cebu, Philippines" },
-    { label: "Studying", value: "BS Information Technology" },
-    { label: "Focus", value: "Full-stack & mobile" },
-    { label: "Currently", value: "Baylo capstone" },
-  ],
+    { icon: "briefcase", text: "4 projects designed and built end to end" },
+    { icon: "screen", text: "Web, mobile & UI/UX design" },
+    { icon: "pin", text: "Based in Cebu, Philippines" },
+    { icon: "send", text: "Open to freelance & internships" },
+  ] as const,
 };
 
 /** Keys must match the icon map in components/SkillIcon.tsx. */
@@ -238,6 +241,7 @@ export const skills = [
   "CSS",
   "C",
   "Git",
+  "Figma",
 ] as const;
 
 export const inquiries = [

@@ -2,6 +2,7 @@ import {
   siC,
   siCss,
   siExpo,
+  siFigma,
   siGit,
   siHtml5,
   siJavascript,
@@ -39,20 +40,21 @@ const icons: Record<(typeof skills)[number], SimpleIcon> = {
   CSS: siCss,
   C: siC,
   Git: siGit,
+  Figma: siFigma,
 };
 
-/** Monochrome brand icon that takes the current text color; brand color on hover. */
-export function SkillIcon({ name }: { name: (typeof skills)[number] }) {
+/** True when a brand color is too dark to read on a dark surface. */
+function isDark(hex: string) {
+  const n = parseInt(hex, 16);
+  const [r, g, b] = [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+  return 0.299 * r + 0.587 * g + 0.114 * b < 70;
+}
+
+/** Brand-colored icon; near-black brands (Next.js, Expo…) use the text color instead. */
+export function BrandIcon({ name, size = 26 }: { name: (typeof skills)[number]; size?: number }) {
   const icon = icons[name];
   return (
-    <svg
-      viewBox="0 0 24 24"
-      width="28"
-      height="28"
-      aria-hidden="true"
-      className="fill-current transition-colors duration-300 group-hover:fill-[var(--brand)]"
-      style={{ "--brand": `#${icon.hex}` } as React.CSSProperties}
-    >
+    <svg viewBox="0 0 24 24" width={size} height={size} aria-hidden="true" fill={isDark(icon.hex) ? "currentColor" : `#${icon.hex}`}>
       <path d={icon.path} />
     </svg>
   );

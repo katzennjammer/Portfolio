@@ -87,7 +87,7 @@ export default function Home() {
   return (
     <>
       <Loader />
-      <div className="mx-auto max-w-[1480px] px-2 pt-2 sm:px-4 sm:pt-4">
+      <div className="mx-auto max-w-[1480px] px-2 py-2 sm:px-4 sm:py-4">
         <div id="top" className="overflow-clip rounded-[1.75rem] border border-line bg-surface shadow-[0_1px_0_rgb(0_0_0/0.02)] sm:rounded-[2.5rem]">
           <Header />
           <main>
@@ -416,12 +416,12 @@ export default function Home() {
               </div>
             </section>
 
-            <footer className="border-t border-line">
-              <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-5 px-5 py-8 text-sm text-muted sm:px-10">
+            <footer className="mx-auto max-w-7xl px-5 sm:px-10">
+              <div className="flex flex-wrap items-center justify-between gap-5 border-t border-line py-8 text-muted sm:py-10">
                 <span>
                   © {new Date().getFullYear()} {profile.name}
                 </span>
-                <ul className="flex gap-2">
+                <ul className="flex gap-3">
                   {socials.map((s) => (
                     <li key={s.kind}>
                       <a
@@ -430,16 +430,16 @@ export default function Home() {
                         rel="noreferrer"
                         aria-label={s.label}
                         title={s.label}
-                        className="grid size-10 place-items-center rounded-full border border-line-strong text-fg-2 transition-colors hover:bg-fg hover:text-bg"
+                        className="grid size-12 place-items-center rounded-full border border-line-strong text-muted transition-colors hover:bg-fg hover:text-bg"
                       >
-                        <SocialIcon kind={s.kind} size={17} />
+                        <SocialIcon kind={s.kind} size={20} />
                       </a>
                     </li>
                   ))}
                 </ul>
-                <a href="#top" className="inline-flex items-center gap-2 hover:text-fg">
+                <a href="#top" className="inline-flex items-center gap-2 transition-colors hover:text-fg">
                   Back to top
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                     <path d="M12 19V5M5 12l7-7 7 7" />
                   </svg>
                 </a>

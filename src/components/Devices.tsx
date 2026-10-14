@@ -45,7 +45,7 @@ export function BrowserWindow({ src, alt, url, className = "" }: { src: string; 
         <span className="size-2.5 rounded-full bg-[#28c840]" />
         <span className="ml-3 flex-1 truncate rounded-md bg-black/5 px-3 py-0.5 text-center font-mono text-[10px] text-black/50">{url}</span>
       </div>
-      <img src={src} alt={alt} className="block aspect-[16/10] w-full object-cover object-top" />
+      <img src={src} alt={alt} className="block h-auto w-full" />
     </div>
   );
 }

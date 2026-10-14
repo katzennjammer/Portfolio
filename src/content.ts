@@ -46,10 +46,9 @@ export type SocialKind = "github" | "linkedin" | "facebook" | "instagram";
 
 export const socials: { kind: SocialKind; label: string; href: string }[] = [
   { kind: "github", label: "GitHub", href: "https://github.com/katzennjammer" },
-  // TODO: replace with your real profile links.
-  { kind: "linkedin", label: "LinkedIn", href: "https://www.linkedin.com/in/your-handle" },
-  { kind: "facebook", label: "Facebook", href: "https://www.facebook.com/your-handle" },
-  { kind: "instagram", label: "Instagram", href: "https://www.instagram.com/your-handle" },
+  { kind: "linkedin", label: "LinkedIn", href: "https://www.linkedin.com/in/jamaica-j-982777248/" },
+  { kind: "facebook", label: "Facebook", href: "https://www.facebook.com/profile.php?id=61580421610398" },
+  { kind: "instagram", label: "Instagram", href: "https://www.instagram.com/_wonderjam17/" },
 ];
 
 /** GitHub username for the contribution chart. */
@@ -67,7 +66,7 @@ export const services = [
     title: "Mobile",
     body: "Android and iOS apps from one codebase, with maps, cameras, real-time chat, video calls and offline-friendly data.",
     tools: ["React Native", "Expo", "TypeScript"],
-    example: "Baylo, Suot Mobile",
+    example: "Baylo, Suot",
   },
   {
     title: "UI/UX Design",
@@ -156,20 +155,25 @@ export const projects: Project[] = [
     device: "browser",
   },
   {
-    name: "Suot Mobile",
+    name: "Suot",
     year: "2026",
-    kind: "Mobile",
+    kind: "Web + Mobile",
     tagline: "Style passed on.",
     description:
-      "A peer-to-peer clothing-swap app for the Philippines. People trade pre-loved clothes with Pasa-Points instead of money, giving them a second life.",
+      "A peer-to-peer clothing-swap marketplace for the Philippines, on the web and on mobile. People trade pre-loved clothes with Pasa-Points instead of money, giving them a second life.",
     highlights: [
       "Real-time chat with swap-offer cards and peer-to-peer video calls over WebRTC",
       "Meetup map and distance-sorted catalog built on OpenStreetMap",
       "AI price suggestions from the Gemini API",
     ],
     tags: ["React Native", "Expo", "TypeScript", "Supabase", "WebRTC"],
-    links: [{ label: "View code", href: "https://github.com/katzennjammer/SuotMobile" }],
+    links: [
+      { label: "View web code", href: "https://github.com/katzennjammer/Suot" },
+      { label: "View app code", href: "https://github.com/katzennjammer/SuotMobile" },
+    ],
     palette: ["#4a635d", "#f1c7d6"],
+    image: "/work/suot.webp",
+    device: "browser",
   },
   {
     name: "Medicare",

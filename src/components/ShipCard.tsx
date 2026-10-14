@@ -3,7 +3,7 @@ export function ShipCard({ className = "" }: { className?: string }) {
   const rows = [
     { name: "baylo", note: "mobile + api" },
     { name: "sunward", note: "client · web" },
-    { name: "suot-mobile", note: "mobile" },
+    { name: "suot", note: "web + mobile" },
   ];
 
   return (

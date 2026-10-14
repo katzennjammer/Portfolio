@@ -1,10 +1,13 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 type Day = { date: string; count: number; level: 0 | 1 | 2 | 3 | 4 };
 
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+/** Cell colors for levels 0–4. The card is dark in both themes, so these are fixed. */
+const HEAT = ["rgb(255 255 255 / 0.07)", "#1d5a40", "#26875a", "#38bd77", "#62e8a0"];
 
 /** Groups days into week columns (Sunday first), padding the first week. */
 function toWeeks(days: Day[]) {
@@ -34,20 +37,21 @@ function stats(days: Day[]) {
     longest = Math.max(longest, run);
     if (!best || d.count > best.count) best = d;
   }
-  // Current streak counts back from today (or yesterday, if today is still empty).
-  let current = 0;
-  let i = days.length - 1;
-  if (i >= 0 && days[i].count === 0) i--;
-  for (; i >= 0 && days[i].count > 0; i--) current++;
   const active = days.filter((d) => d.count > 0).length;
-  return { longest, current, best, active };
+  return { longest, best, active, total: days.length };
 }
 
-/** Contribution heatmap for the last year, from a public GitHub contributions API. */
+function shortDate(iso: string) {
+  const d = new Date(iso + "T00:00:00Z");
+  return `${MONTHS[d.getUTCMonth()]} ${d.getUTCDate()}`;
+}
+
+/** Contribution card for the last year, from a public GitHub contributions API. */
 export function GitHubActivity({ user }: { user: string }) {
   const [days, setDays] = useState<Day[] | null>(null);
   const [total, setTotal] = useState(0);
   const [failed, setFailed] = useState(false);
+  const scroller = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctrl = new AbortController();
@@ -57,90 +61,107 @@ export function GitHubActivity({ user }: { user: string }) {
         setDays(data.contributions);
         setTotal(data.total.lastYear);
       })
-      .catch((e) => {
+      .catch(() => {
         if (!ctrl.signal.aborted) setFailed(true);
-        return e;
       });
     return () => ctrl.abort();
   }, [user]);
 
+  // On narrow screens the chart scrolls sideways; start at the most recent weeks.
+  useEffect(() => {
+    const el = scroller.current;
+    if (days && el) el.scrollLeft = el.scrollWidth;
+  }, [days]);
+
   const weeks = useMemo(() => (days ? toWeeks(days) : []), [days]);
   const s = useMemo(() => (days ? stats(days) : null), [days]);
-
-  if (failed) {
-    return (
-      <p className="text-muted">
-        Couldn&apos;t load activity right now.{" "}
-        <a className="underline underline-offset-4" href={`https://github.com/${user}`}>
-          See it on GitHub
-        </a>
-        .
-      </p>
-    );
-  }
-
-  const placeholder = !days;
+  const loading = !days && !failed;
+  const grid = days ? weeks : Array.from({ length: 53 }, () => Array<Day | null>(7).fill(null));
 
   return (
-    <div>
-      <div className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-4">
-        {[
-          { label: "Contributions, last year", value: placeholder ? "—" : total.toLocaleString() },
-          { label: "Active days", value: placeholder ? "—" : s!.active },
-          { label: "Longest streak", value: placeholder ? "—" : `${s!.longest} days` },
-          {
-            label: "Busiest day",
-            value: placeholder || !s!.best ? "—" : `${s!.best.count}`,
-          },
-        ].map((x) => (
-          <div key={x.label} className="bg-surface p-5">
-            <div className="text-3xl font-semibold tracking-tight tabular-nums sm:text-4xl">{x.value}</div>
-            <div className="mt-1 text-sm text-muted">{x.label}</div>
+    <div
+      className="relative overflow-hidden rounded-[1.75rem] bg-[#121513] p-6 text-[#eef1ec] ring-1 ring-white/5 sm:rounded-[2.5rem] sm:p-12 [:root[data-theme=dark]_&]:bg-[#1b2220]"
+      style={{ backgroundImage: "radial-gradient(60% 90% at 100% 0%, rgb(56 189 119 / 0.18), transparent 70%)" }}
+    >
+      <div className="flex flex-wrap items-end justify-between gap-10">
+        <div>
+          <div className="text-[clamp(4.5rem,13vw,9rem)] leading-[0.85] font-bold tracking-[-0.05em] tabular-nums">
+            {days ? total.toLocaleString() : failed ? "—" : <span className="animate-pulse text-white/20">000</span>}
           </div>
-        ))}
+          <div className="mt-4 text-lg text-white/75 sm:text-xl">contributions in the last year</div>
+        </div>
+
+        <dl className="grid w-full grid-cols-3 gap-4 sm:w-auto sm:gap-12">
+          {[
+            { label: "Best day", value: s?.best ? s.best.count : "—", unit: s?.best ? shortDate(s.best.date) : "" },
+            { label: "Longest streak", value: s ? s.longest : "—", unit: "days" },
+            { label: "Active days", value: s ? s.active : "—", unit: s ? `of ${s.total}` : "" },
+          ].map((x) => (
+            <div key={x.label}>
+              <dt className="text-[10px] font-medium tracking-[0.18em] text-white/50 uppercase sm:text-xs sm:whitespace-nowrap">{x.label}</dt>
+              <dd className="mt-2">
+                <span className="text-3xl font-bold tracking-tight tabular-nums sm:text-4xl">{x.value}</span>{" "}
+                <span className="block text-sm text-white/60 sm:inline sm:text-base">{x.unit}</span>
+              </dd>
+            </div>
+          ))}
+        </dl>
       </div>
 
-      <div className="mt-6 overflow-x-auto rounded-2xl border border-line bg-surface p-5">
-        <div className="min-w-[640px]">
-          <div className="mb-2 flex gap-[3px] font-mono text-[10px] text-muted">
-            {(placeholder ? Array.from({ length: 53 }, () => [null]) : weeks).map((w, i) => {
-              const first = w.find(Boolean) as Day | undefined;
-              const d = first ? new Date(first.date + "T00:00:00Z") : null;
-              const showMonth = d && d.getUTCDate() <= 7;
-              return (
-                <span key={i} className="min-w-0 flex-1 overflow-visible whitespace-nowrap">
-                  {showMonth ? MONTHS[d!.getUTCMonth()] : ""}
-                </span>
-              );
-            })}
-          </div>
-          <div className="flex gap-[3px]" role="img" aria-label={placeholder ? "Loading contributions" : `${total} contributions in the last year`}>
-            {(placeholder ? Array.from({ length: 53 }, () => Array<null>(7).fill(null)) : weeks).map((w, i) => (
-              <div key={i} className="flex min-w-0 flex-1 flex-col gap-[3px]">
-                {w.map((d, j) => (
-                  <span
-                    key={j}
-                    title={d ? `${d.count} contribution${d.count === 1 ? "" : "s"} on ${d.date}` : undefined}
-                    className={`aspect-square w-full rounded-[3px] ${placeholder ? "animate-pulse" : ""}`}
-                    style={{ background: d ? `var(--heat-${d.level})` : placeholder ? "var(--heat-0)" : "transparent" }}
-                  />
-                ))}
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="mt-4 flex items-center justify-between gap-4 text-xs text-muted">
-          <a href={`https://github.com/${user}`} className="underline-offset-4 hover:underline">
-            @{user}
+      {failed ? (
+        <p className="mt-12 text-white/70">
+          Couldn&apos;t load the chart right now.{" "}
+          <a className="underline underline-offset-4" href={`https://github.com/${user}`}>
+            See it on GitHub
           </a>
-          <div className="flex items-center gap-1.5">
-            Less
-            {[0, 1, 2, 3, 4].map((l) => (
-              <span key={l} className="size-[11px] rounded-[3px]" style={{ background: `var(--heat-${l})` }} />
-            ))}
-            More
+          .
+        </p>
+      ) : (
+        <div ref={scroller} className="-mx-2 mt-12 overflow-x-auto px-2 pt-2 pb-3 sm:mt-14">
+          <div className="min-w-[720px]">
+            <div className="mb-3 flex gap-[5px] text-sm text-white/55">
+              {grid.map((w, i) => {
+                const first = w.find(Boolean) ?? null;
+                const d = first ? new Date(first.date + "T00:00:00Z") : null;
+                return (
+                  <span key={i} className="min-w-0 flex-1 overflow-visible whitespace-nowrap">
+                    {d && d.getUTCDate() <= 7 ? MONTHS[d.getUTCMonth()] : ""}
+                  </span>
+                );
+              })}
+            </div>
+            <div className="flex gap-[5px]" role="img" aria-label={days ? `${total} contributions in the last year` : "Loading contributions"}>
+              {grid.map((w, i) => (
+                <div key={i} className="flex min-w-0 flex-1 flex-col gap-[5px]">
+                  {w.map((d, j) => (
+                    <span
+                      key={j}
+                      title={d ? `${d.count} contribution${d.count === 1 ? "" : "s"} on ${shortDate(d.date)}` : undefined}
+                      className={`aspect-square w-full rounded-[22%] ${loading ? "animate-pulse" : ""}`}
+                      style={{
+                        background: d ? HEAT[d.level] : loading ? HEAT[0] : "transparent",
+                        boxShadow: d && d.level >= 3 ? `0 0 ${d.level === 4 ? 14 : 8}px ${HEAT[d.level]}99` : undefined,
+                      }}
+                    />
+                  ))}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
+      )}
+
+      <div className="mt-6 flex items-center justify-between gap-4 text-sm text-white/60">
+        <div className="flex items-center gap-1.5">
+          Less
+          {HEAT.map((c, l) => (
+            <span key={l} className="size-3 rounded-[3px]" style={{ background: c }} />
+          ))}
+          More
+        </div>
+        <a href={`https://github.com/${user}`} target="_blank" rel="noreferrer" className="hover:text-white">
+          @{user}
+        </a>
       </div>
     </div>
   );

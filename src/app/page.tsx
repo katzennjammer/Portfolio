@@ -12,16 +12,8 @@ import { ServiceTabs } from "@/components/ServiceTabs";
 import { ShipCard } from "@/components/ShipCard";
 import { SocialIcon } from "@/components/SocialIcon";
 
-const stack = ["TypeScript", "React Native", "Next.js", "Expo", "Laravel", "PostgreSQL", "Supabase", "Prisma", "Tailwind", "Three.js", "MySQL", "PHP"];
-
-function SectionLabel({ n, children }: { n: string; children: React.ReactNode }) {
-  return (
-    <div className="mb-10 flex items-center gap-4 font-mono text-xs tracking-widest text-muted uppercase sm:mb-14">
-      <span className="text-accent">{n}</span>
-      <span className="h-px w-10 bg-line-strong" />
-      <span>{children}</span>
-    </div>
-  );
+function SectionLabel({ children }: { children: React.ReactNode }) {
+  return <div className="mb-10 text-sm font-medium tracking-[0.2em] text-muted uppercase sm:mb-14">{children}</div>;
 }
 
 const chips = {
@@ -202,22 +194,10 @@ export default function Home() {
               </div>
             </section>
 
-            {/* ───────── Stack strip ───────── */}
-            <div className="marquee-wrap overflow-hidden border-y border-line bg-bg-2 py-5" aria-label="Tools I use">
-              <div className="marquee flex w-max gap-10 pr-10 font-serif text-3xl whitespace-nowrap italic sm:text-4xl">
-                {[...stack, ...stack].map((s, i) => (
-                  <span key={i} className="flex items-center gap-10" aria-hidden={i >= stack.length}>
-                    {s}
-                    <span className="text-accent not-italic">✳</span>
-                  </span>
-                ))}
-              </div>
-            </div>
-
             {/* ───────── What I do ───────── */}
             <section className="pt-24 sm:pt-32">
               <div className="mx-auto max-w-7xl px-5 sm:px-10">
-                <SectionLabel n="01">What I do</SectionLabel>
+                <SectionLabel>What I do</SectionLabel>
                 <Reveal>
                   <h2 className="max-w-6xl text-[clamp(2.1rem,5vw,4.4rem)] leading-[1.18] font-medium tracking-[-0.03em]">
                     I like owning the whole thing. I <Chip kind="sketch" /> sketch the flow, <Chip kind="code" /> write the code,{" "}
@@ -234,7 +214,7 @@ export default function Home() {
             {/* ───────── Work ───────── */}
             <section id="work" className="mx-auto max-w-7xl px-3 pt-24 pb-24 sm:px-6 sm:pt-32 sm:pb-32">
               <div className="px-2 sm:px-4">
-                <SectionLabel n="02">Selected work</SectionLabel>
+                <SectionLabel>Selected work</SectionLabel>
                 <Reveal>
                   <h2 className="-mt-4 text-[clamp(2.6rem,6vw,4.75rem)] leading-none font-bold tracking-[-0.04em] sm:-mt-6">Featured projects</h2>
                   <p className="mt-5 max-w-2xl text-lg leading-relaxed text-fg-2 sm:text-xl">
@@ -308,7 +288,7 @@ export default function Home() {
             {/* ───────── Experience ───────── */}
             <section id="experience" className="border-t border-line bg-bg-2">
               <div className="mx-auto max-w-6xl px-5 py-24 sm:px-8 sm:py-32">
-                <SectionLabel n="03">Experience</SectionLabel>
+                <SectionLabel>Experience</SectionLabel>
                 <ol>
                   {experience.map((e, i) => (
                     <Reveal
@@ -332,19 +312,33 @@ export default function Home() {
             </section>
 
             {/* ───────── GitHub ───────── */}
-            <section className="mx-auto max-w-6xl px-5 py-24 sm:px-8 sm:py-32">
-              <SectionLabel n="04">On GitHub</SectionLabel>
+            <section className="mx-auto max-w-7xl px-3 py-24 sm:px-6 sm:py-32">
               <Reveal>
-                <h2 className="mb-10 max-w-2xl text-4xl leading-[1.05] font-semibold tracking-tight sm:text-5xl">
-                  Shipping, <span className="font-serif font-normal text-accent italic">one commit at a time.</span>
-                </h2>
+                <div className="mb-10 flex flex-wrap items-end justify-between gap-6 px-2 sm:mb-12 sm:px-4">
+                  <div>
+                    <SectionLabel>On GitHub</SectionLabel>
+                    <h2 className="-mt-4 text-[clamp(2.6rem,6vw,4.75rem)] leading-none font-bold tracking-[-0.04em] sm:-mt-6">GitHub activity</h2>
+                    <p className="mt-5 max-w-xl text-lg leading-relaxed text-fg-2 sm:text-xl">
+                      A year of commits across my apps, pulled live from my profile.
+                    </p>
+                  </div>
+                  <a
+                    href={`https://github.com/${githubUser}`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="group inline-flex items-center gap-2 rounded-full border border-line-strong px-7 py-4 text-lg font-medium transition-colors hover:bg-fg hover:text-bg"
+                  >
+                    View GitHub
+                    <Arrow className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </a>
+                </div>
                 <GitHubActivity user={githubUser} />
               </Reveal>
             </section>
 
             {/* ───────── About ───────── */}
             <section id="about" className="mx-auto max-w-6xl px-5 pb-24 sm:px-8 sm:pb-32">
-              <SectionLabel n="05">About me</SectionLabel>
+              <SectionLabel>About me</SectionLabel>
               <div className="grid gap-14 lg:grid-cols-[1.3fr_1fr]">
                 <Reveal>
                   <p className="text-2xl leading-snug font-medium tracking-tight sm:text-3xl">{about.paragraphs[0]}</p>
@@ -385,11 +379,7 @@ export default function Home() {
             {/* ───────── Contact ───────── */}
             <section id="contact" className="bg-fg text-bg">
               <div className="mx-auto max-w-6xl px-5 py-24 sm:px-8 sm:py-32">
-                <div className="mb-10 flex items-center gap-4 font-mono text-xs tracking-widest uppercase opacity-60 sm:mb-14">
-                  <span>06</span>
-                  <span className="h-px w-10 bg-current" />
-                  <span>Contact</span>
-                </div>
+                <div className="mb-10 text-sm font-medium tracking-[0.2em] uppercase opacity-60 sm:mb-14">Contact</div>
                 <Reveal>
                   <h2 className="text-[clamp(3rem,9vw,7.5rem)] leading-[0.9] font-bold tracking-[-0.04em]">
                     Let&apos;s build

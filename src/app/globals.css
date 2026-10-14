@@ -162,19 +162,6 @@ body::before {
   animation-delay: var(--delay, 0ms);
 }
 
-/* Infinite tech-stack strip. */
-@keyframes marquee {
-  to {
-    transform: translateX(-50%);
-  }
-}
-.marquee {
-  animation: marquee 38s linear infinite;
-}
-.marquee-wrap:hover .marquee {
-  animation-play-state: paused;
-}
-
 /* Status dot pulse. */
 @keyframes ping {
   75%,
@@ -227,7 +214,6 @@ body::before {
   }
   .greet,
   .rise,
-  .marquee,
   .ping,
   .float {
     animation: none;

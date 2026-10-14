@@ -108,8 +108,10 @@ export type Project = {
   palette: [string, string];
   /** Screenshot in public/work/. Without one the project gets generated cover art. */
   image?: string;
-  /** Frame the screenshot sits in. */
-  device?: "phone" | "browser";
+  /** Frame the screenshot sits in. "phones" fans out three phones: side screens from `extraImages`. */
+  device?: "phone" | "phones" | "browser";
+  /** For "phones": [left, right] screenshots shown tilted behind the main one. */
+  extraImages?: [string, string];
 };
 
 export const projects: Project[] = [
@@ -132,7 +134,8 @@ export const projects: Project[] = [
     ],
     palette: ["#2f6b4f", "#cfe8a9"],
     image: "/work/baylo.webp",
-    device: "phone",
+    device: "phones",
+    extraImages: ["/work/baylo-hubs.webp", "/work/baylo-trades.webp"],
   },
   {
     name: "Sunward",

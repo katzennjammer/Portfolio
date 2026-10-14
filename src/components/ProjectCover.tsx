@@ -17,7 +17,25 @@ export function ProjectCover({ project }: { project: Project }) {
       }}
     >
       {project.image ? (
-        project.device === "phone" ? (
+        project.device === "phones" && project.extraImages ? (
+          <div className="relative h-full w-full">
+            <Phone
+              src={project.extraImages[0]}
+              alt={`${project.name}: safe meetup hubs map`}
+              className="absolute top-[24%] left-[13%] w-[27%] rotate-[-9deg] transition-transform duration-700 group-hover:-translate-x-2 group-hover:rotate-[-12deg]"
+            />
+            <Phone
+              src={project.extraImages[1]}
+              alt={`${project.name}: trades in progress`}
+              className="absolute top-[24%] right-[13%] w-[27%] rotate-[9deg] transition-transform duration-700 group-hover:translate-x-2 group-hover:rotate-[12deg]"
+            />
+            <Phone
+              src={project.image}
+              alt={`${project.name}: home feed`}
+              className="absolute top-[12%] left-1/2 z-[1] w-[31%] -translate-x-1/2 transition-transform duration-700 group-hover:-translate-y-3"
+            />
+          </div>
+        ) : project.device === "phone" ? (
           <Phone
             src={project.image}
             alt={`${project.name} app screenshot`}

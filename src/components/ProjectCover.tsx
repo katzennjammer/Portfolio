@@ -1,4 +1,5 @@
 import type { Project } from "@/content";
+import { BrowserWindow, Phone } from "./Devices";
 
 /**
  * Generated cover art for a project: its name set large over the project's
@@ -8,9 +9,35 @@ export function ProjectCover({ project, index }: { project: Project; index: numb
   const [base, hi] = project.palette;
 
   if (project.image) {
+    // Screenshot framed in a phone or browser window over the project's colors.
     return (
-      // eslint-disable-next-line @next/next/no-img-element -- static screenshots from /public
-      <img src={project.image} alt={`${project.name} screenshot`} className="aspect-[4/3] w-full rounded-[1.75rem] object-cover" />
+      <div
+        className="relative grid aspect-[4/3] w-full place-items-center overflow-hidden rounded-[1.75rem]"
+        style={{ background: base, color: hi }}
+      >
+        <div
+          className="absolute -top-[22%] -right-[10%] aspect-square w-[52%] rounded-full opacity-90 transition-transform duration-700 group-hover:-translate-x-4 group-hover:translate-y-3"
+          style={{ background: hi }}
+          aria-hidden="true"
+        />
+        <div className="absolute top-6 left-7 font-mono text-xs tracking-widest uppercase opacity-80" aria-hidden="true">
+          {String(index + 1).padStart(2, "0")} / {project.kind}
+        </div>
+        {project.device === "phone" ? (
+          <Phone
+            src={project.image}
+            alt={`${project.name} app screenshot`}
+            className="relative mt-[12%] w-[34%] rotate-[-4deg] transition-transform duration-700 group-hover:rotate-0"
+          />
+        ) : (
+          <BrowserWindow
+            src={project.image}
+            alt={`${project.name} website screenshot`}
+            url={project.name}
+            className="relative mt-[10%] w-[84%] transition-transform duration-700 group-hover:-translate-y-2"
+          />
+        )}
+      </div>
     );
   }
 

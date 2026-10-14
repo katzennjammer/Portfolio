@@ -14,7 +14,7 @@ export function Greeting() {
   }, []);
 
   return (
-    <span className="inline-flex overflow-hidden align-bottom" aria-label="Hello">
+    <span className="inline-flex overflow-hidden pb-[0.1em] align-bottom" aria-label="Hello">
       <span key={i} className="greet" aria-hidden="true">
         {greetings[i]}
       </span>

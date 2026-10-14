@@ -12,14 +12,24 @@ export const profile = {
   timeZoneLabel: "GMT+8",
   email: "jmjumuad2@gmail.com",
   /** Shown as a pill in the hero. Set to null to hide it. */
-  status: "Open to freelance & internships",
-  /** Put a photo at public/me.jpg and set this to "/me.jpg" to replace the monogram. */
-  photo: null as string | null,
+  status: "Open to work",
+  /** Square photo next to your name (public/me.webp). Set to null to show a monogram instead. */
+  photo: "/me.webp" as string | null,
+  /** Larger photo in the About section. */
+  photoLarge: "/me-full.webp" as string | null,
   /** Put your CV at public/cv.pdf and set this to "/cv.pdf" to show a download button. */
   cv: null as string | null,
   intro:
     "I build web and mobile apps for communities, the kind where strangers need a good reason to trust each other.",
+  /** The big line under your name. */
+  headline: "Full-stack developer building web and mobile apps that real communities use, from the screen to the database.",
 };
+
+/** "Currently building …" line in the hero. */
+export const building: { name: string; icon: "leaf" | "sun"; href: string }[] = [
+  { name: "Baylo", icon: "leaf", href: "#work" },
+  { name: "Sunward", icon: "sun", href: "#work" },
+];
 
 export const greetings = [
   "Hello",
@@ -79,8 +89,10 @@ export type Project = {
   links: { label: string; href: string }[];
   /** Colors for the project's cover art: [base, highlight]. */
   palette: [string, string];
-  /** Put a screenshot in public/ and set e.g. "/work/baylo.png" to replace the cover art. */
+  /** Screenshot in public/work/. Without one the project gets generated cover art. */
   image?: string;
+  /** Frame the screenshot sits in. */
+  device?: "phone" | "browser";
 };
 
 export const projects: Project[] = [
@@ -102,6 +114,8 @@ export const projects: Project[] = [
       { label: "API & admin", href: "https://github.com/katzennjammer/baylo-api" },
     ],
     palette: ["#2f6b4f", "#cfe8a9"],
+    image: "/work/baylo.webp",
+    device: "phone",
   },
   {
     name: "Sunward",
@@ -118,6 +132,8 @@ export const projects: Project[] = [
     tags: ["Next.js", "TypeScript", "React Three Fiber", "Supabase", "Tailwind"],
     links: [],
     palette: ["#c2502a", "#ffd2a6"],
+    image: "/work/sunward.webp",
+    device: "browser",
   },
   {
     name: "Suot Mobile",

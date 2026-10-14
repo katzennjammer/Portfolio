@@ -201,8 +201,8 @@ export const projects: Project[] = [
     image: "/work/medicare-catalog.webp",
     device: "browsers",
     extraImages: [
-      { src: "/work/medicare-queue.webp", alt: "Medicare live queue display" },
       { src: "/work/medicare-login.webp", alt: "Medicare staff login" },
+      { src: "/work/medicare-queue.webp", alt: "Medicare live queue display" },
     ],
   },
 ];

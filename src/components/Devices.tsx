@@ -19,14 +19,14 @@ export function Laptop({ src, alt, className = "" }: { src: string; alt: string;
   );
 }
 
-/** Phone frame with a screenshot on its screen. */
+/** Phone frame with a screenshot on its screen. Corner radii are percentages so they stay gentle on small phones. */
 export function Phone({ src, alt, className = "" }: { src: string; alt: string; className?: string }) {
   return (
     <div className={className}>
-      <div className="relative rounded-[2.2rem] bg-[#1b1d1c] p-[4.5%] shadow-[0_40px_70px_-30px_rgb(0_0_0/0.6)] ring-1 ring-white/10">
-        <div className="relative overflow-hidden rounded-[1.75rem] bg-black">
+      <div className="relative rounded-[12%/5.5%] bg-[#1b1d1c] p-[3.5%] shadow-[0_40px_70px_-30px_rgb(0_0_0/0.6)] ring-1 ring-white/10">
+        <div className="relative overflow-hidden rounded-[7%/3.2%] bg-black">
           <img src={src} alt={alt} className="block aspect-[9/19.5] w-full object-cover object-top" />
-          <div className="absolute top-[1.6%] left-1/2 h-[3%] w-[30%] -translate-x-1/2 rounded-full bg-black" />
+          <div className="absolute top-[1.2%] left-1/2 h-[2.4%] w-[24%] -translate-x-1/2 rounded-full bg-black" />
         </div>
         {/* side button */}
         <div className="absolute top-[22%] -right-[2.5%] h-[10%] w-[2.5%] rounded-r-md bg-[#2a2d2b]" />

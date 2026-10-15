@@ -1,6 +1,7 @@
-import { about, building, contact, experience, githubUser, profile, projects, socials } from "@/content";
+import { about, building, contact, experience, experienceIntro, githubUser, profile, projects, socials } from "@/content";
 import { ContactChat } from "@/components/ContactChat";
 import { CopyEmail } from "@/components/CopyEmail";
+import { ExperienceLogo } from "@/components/ExperienceLogo";
 import { GitHubActivity } from "@/components/GitHubActivity";
 import { Laptop, Phone } from "@/components/Devices";
 import { Header } from "@/components/Header";
@@ -302,29 +303,43 @@ export default function Home() {
             </section>
 
             {/* ───────── Experience ───────── */}
-            <section id="experience" className="border-t border-line bg-bg-2">
-              <div className="mx-auto max-w-6xl px-5 py-24 sm:px-8 sm:py-32">
-                <SectionLabel>Experience</SectionLabel>
-                <ol>
-                  {experience.map((e, i) => (
-                    <Reveal
-                      as="li"
-                      key={e.org}
-                      delay={i * 80}
-                      className="group grid gap-3 border-t border-line-strong py-9 last:border-b sm:grid-cols-[140px_1fr_1.2fr] sm:gap-8"
-                    >
-                      <div className="font-mono text-sm text-muted">{e.period}</div>
-                      <div>
-                        <h3 className="text-2xl font-semibold tracking-tight transition-colors group-hover:text-accent">{e.role}</h3>
-                        <div className="mt-1 text-fg-2">
-                          {e.org} <span className="text-muted">· {e.type}</span>
-                        </div>
-                      </div>
-                      <p className="leading-relaxed text-fg-2">{e.body}</p>
-                    </Reveal>
-                  ))}
-                </ol>
-              </div>
+            <section id="experience" className="mx-auto max-w-7xl px-5 pb-24 sm:px-10 sm:pb-32">
+              <Reveal>
+                <h2 className="text-[clamp(2.6rem,6vw,4.75rem)] leading-none font-bold tracking-[-0.04em]">Experience</h2>
+                <p className="mt-5 max-w-xl text-lg leading-relaxed text-fg-2 sm:text-xl">{experienceIntro}</p>
+              </Reveal>
+
+              <ol className="mt-12 sm:mt-16">
+                {experience.map((e, i) => (
+                  <Reveal
+                    as="li"
+                    key={e.org}
+                    delay={i * 80}
+                    className="group grid grid-cols-[auto_1fr] gap-x-5 gap-y-4 border-t border-line py-9 last:border-b sm:gap-x-8 sm:py-11 lg:grid-cols-[auto_1fr_auto]"
+                  >
+                    <ExperienceLogo logo={e.logo} label={e.org} tilt={i % 2 ? 4 : -4} />
+
+                    <div className="min-w-0 self-center">
+                      <h3 className="flex flex-wrap items-center gap-x-2.5 gap-y-1.5 text-xl leading-snug sm:text-2xl">
+                        <span className="font-semibold tracking-tight">{e.role}</span>
+                        <span className="text-muted">· {e.org}</span>
+                        {e.current && (
+                          <span className="inline-flex items-center gap-1.5 rounded-full bg-accent-soft px-3 py-1 text-sm font-medium text-accent">
+                            <span className="size-1.5 rounded-full bg-accent" />
+                            Now
+                          </span>
+                        )}
+                      </h3>
+                      <p className="mt-3 max-w-2xl leading-relaxed text-fg-2 sm:text-lg">{e.body}</p>
+                    </div>
+
+                    <div className="col-start-2 lg:col-start-3 lg:self-center lg:text-right">
+                      <div className="text-lg font-medium tabular-nums">{e.period}</div>
+                      <div className="mt-1 text-muted">{e.meta}</div>
+                    </div>
+                  </Reveal>
+                ))}
+              </ol>
             </section>
 
             {/* ───────── GitHub ───────── */}

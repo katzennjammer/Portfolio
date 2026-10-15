@@ -207,27 +207,49 @@ export const projects: Project[] = [
   },
 ];
 
-export const experience = [
+export type ExperienceLogo =
+  | { kind: "image"; src: string }
+  | { kind: "sun" }
+  | { kind: "loop" };
+
+export const experienceIntro = "Where I've been designing, building and learning.";
+
+export const experience: {
+  role: string;
+  org: string;
+  /** Shown as a green "Now" badge. */
+  current: boolean;
+  period: string;
+  meta: string;
+  body: string;
+  logo: ExperienceLogo;
+}[] = [
   {
-    period: "2026",
     role: "Web Developer",
     org: "Sunward",
-    type: "Client",
-    body: "Built the Sunward website for a client: topic pages, 3D data views, search, accounts and a light/dark theme, on Next.js and Supabase.",
+    current: false,
+    period: "2026",
+    meta: "Freelance · Client",
+    body: "Designed and built Sunward, a search-first site for hard questions: topic pages, interactive 3D views, search, accounts and a light/dark theme, on Next.js and Supabase.",
+    logo: { kind: "sun" },
   },
   {
-    period: "2026",
     role: "Developer",
     org: "LoomLoop Labs",
-    type: "Capstone team",
-    body: "Building Baylo with a team of four: the Expo mobile app, plus a Next.js API and web admin backed by Postgres.",
+    current: true,
+    period: "2026 – Present",
+    meta: "Capstone team · Lapu-Lapu City",
+    body: "Building Baylo with a team of four: the Expo mobile app, its screen designs, and a Next.js API and web admin backed by Postgres.",
+    logo: { kind: "loop" },
   },
   {
-    period: "Present",
     role: "BS Information Technology",
-    org: "University of Cebu Lapu-Lapu and Mandaue",
-    type: "Education",
-    body: "Coursework and projects across web, mobile, databases and systems, from C programs to full-stack apps.",
+    org: "UCLM College of Computer Studies",
+    current: true,
+    period: "Present",
+    meta: "Education · Lapu-Lapu City",
+    body: "Coursework and projects across web, mobile, databases and systems at the University of Cebu Lapu-Lapu and Mandaue, from C programs to full-stack apps.",
+    logo: { kind: "image", src: "/logos/ccs.webp" },
   },
 ];
 

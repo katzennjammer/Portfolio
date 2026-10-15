@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import { Bricolage_Grotesque, Instrument_Serif, JetBrains_Mono } from "next/font/google";
 import { InlineScript } from "@/components/InlineScript";
 import { THEME_SCRIPT } from "@/lib/theme-script";
@@ -43,7 +44,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <head>
         <InlineScript html={THEME_SCRIPT} />
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+        {/* Vercel Web Analytics: counts visits once Analytics is enabled in the Vercel project. */}
+        <Analytics />
+      </body>
     </html>
   );
 }

@@ -198,12 +198,12 @@ export default function Home() {
                   </div>
                 </div>
 
-                {/* Devices: Sunward on the laptop, Baylo on the phone */}
+                {/* Devices: Sunward on the laptop, Analou Tracker on the phone */}
                 <div className="rise relative mx-auto aspect-[10/8.4] w-full max-w-[640px]" style={{ "--delay": "200ms" } as React.CSSProperties}>
                   <Laptop src="/work/sunward.webp" alt="Sunward website" className="absolute top-[4%] left-0 w-[84%]" />
                   <Phone
-                    src="/work/baylo.webp"
-                    alt="Baylo mobile app"
+                    src="/work/fish-today.webp"
+                    alt="Analou Tracker today screen"
                     className="float absolute right-0 bottom-[3%] w-[26%]"
                   />
                   <ShipCard className="absolute bottom-[1%] left-[-2%] w-[56%] rotate-[-3deg] sm:left-[-4%]" />

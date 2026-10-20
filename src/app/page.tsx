@@ -235,7 +235,7 @@ export default function Home() {
                 <Reveal>
                   <h2 className="-mt-4 text-[clamp(2.6rem,6vw,4.75rem)] leading-none font-bold tracking-[-0.04em] sm:-mt-6">Featured projects</h2>
                   <p className="mt-5 max-w-2xl text-lg leading-relaxed text-fg-2 sm:text-xl">
-                    Apps I&apos;ve designed, built and shipped, from a barter marketplace to a pharmacy kiosk.
+                    Apps I&apos;ve designed, built and shipped, from a barter marketplace to an offline tracker for a fish vendor.
                   </p>
                 </Reveal>
               </div>

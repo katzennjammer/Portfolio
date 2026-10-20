@@ -60,13 +60,13 @@ export const services = [
     title: "Web",
     body: "Fast, accessible sites and dashboards, from landing pages to full products with accounts, search and admin tools.",
     tools: ["Next.js", "React", "Laravel", "Tailwind"],
-    example: "Sunward, Medicare",
+    example: "Sunward, Cat Adoption System",
   },
   {
     title: "Mobile",
     body: "Android and iOS apps from one codebase, with maps, cameras, real-time chat, video calls and offline-friendly data.",
     tools: ["React Native", "Expo", "TypeScript"],
-    example: "Baylo, Suot",
+    example: "Baylo, Suot, Analou Tracker",
   },
   {
     title: "UI/UX Design",
@@ -114,6 +114,8 @@ export type Project = {
    * "browsers" stacks three windows, using `extraImages` for the two behind.
    */
   device?: "phone" | "phones" | "browser" | "browsers";
+  /** Alt text for the main screenshot. */
+  imageAlt?: string;
   /** For "phones" / "browsers": the two screenshots shown behind the main one. */
   extraImages?: [Shot, Shot];
 };
@@ -138,6 +140,7 @@ export const projects: Project[] = [
     ],
     palette: ["#2f6b4f", "#cfe8a9"],
     image: "/work/baylo.webp",
+    imageAlt: "Baylo home feed",
     device: "phones",
     extraImages: [
       { src: "/work/baylo-hubs.webp", alt: "Baylo safe meetup hubs map" },
@@ -184,25 +187,26 @@ export const projects: Project[] = [
     device: "browser",
   },
   {
-    name: "Medicare",
+    name: "Analou Tracker",
     year: "2026",
-    kind: "Web · Kiosk",
-    tagline: "Your health, served faster.",
+    kind: "Mobile · Offline",
+    tagline: "Every sale, every utang, in one place.",
     description:
-      "A kiosk-based pharmacy system. Customers order medicine from a self-service screen while a separate live queue display keeps the counter moving.",
+      "A sales and utang ledger for a market fish vendor. It runs fully offline on her phone, so she can record sales, stock, credit and expenses without internet or an account.",
     highlights: [
-      "Self-service kiosk ordering and a real-time queue display",
-      "Admin dashboard for inventory, orders and low-stock alerts",
-      "Staff and admin authentication with full transaction records",
+      "Tracks sales, kilos sold, spoilage and expenses, with daily, weekly and monthly profit reports",
+      "Utang list for customers and suppliers, with payment history and statements shared by Messenger",
+      "Loan due-date reminders, PIN lock and automatic daily backups",
     ],
-    tags: ["Laravel", "PHP", "MySQL", "Tailwind", "Alpine.js"],
-    links: [{ label: "View code", href: "https://github.com/katzennjammer/Medicare" }],
-    palette: ["#2d5d8a", "#bfe3f2"],
-    image: "/work/medicare-queue.webp",
-    device: "browsers",
+    tags: ["React Native", "Expo", "TypeScript", "SQLite"],
+    links: [{ label: "View code", href: "https://github.com/katzennjammer/fish-tracker" }],
+    palette: ["#0f3d44", "#f1e7d6"],
+    image: "/work/fish-today.webp",
+    imageAlt: "Analou Tracker today screen",
+    device: "phones",
     extraImages: [
-      { src: "/work/medicare-catalog.webp", alt: "Medicare medicine catalog" },
-      { src: "/work/medicare-login.webp", alt: "Medicare staff login" },
+      { src: "/work/fish-utang.webp", alt: "Analou Tracker utang list" },
+      { src: "/work/fish-profit.webp", alt: "Analou Tracker monthly profit report" },
     ],
   },
 ];
@@ -255,7 +259,7 @@ export const experience: {
 
 export const about = {
   heading: "I design it, then I build it right.",
-  bio: "Hi! I'm Jamaica, a BS Information Technology student at the University of Cebu Lapu-Lapu and Mandaue. I like owning an app from the first sketch in Figma to launch day: I design the screens, build them in React Native or Next.js, and wire up the data with Laravel, Postgres or Supabase. So far that's a barter marketplace, a clothing-swap app, a pharmacy kiosk and a client site with 3D views. My favourite parts are the ones that make people trust an app, like ID checks, confirmation codes and numbers that always add up.",
+  bio: "Hi! I'm Jamaica, a BS Information Technology student at the University of Cebu Lapu-Lapu and Mandaue. I like owning an app from the first sketch in Figma to launch day: I design the screens, build them in React Native or Next.js, and wire up the data with Laravel, Postgres or Supabase. So far that's a barter marketplace, a clothing-swap app, an offline sales tracker for a fish vendor and a client site with 3D views. My favourite parts are the ones that make people trust an app, like ID checks, confirmation codes and numbers that always add up.",
   facts: [
     { icon: "briefcase", text: "4 projects designed and built end to end" },
     { icon: "screen", text: "Web, mobile & UI/UX design" },

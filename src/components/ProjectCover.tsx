@@ -31,7 +31,7 @@ export function ProjectCover({ project }: { project: Project }) {
             />
             <Phone
               src={project.image}
-              alt={`${project.name}: home feed`}
+              alt={project.imageAlt ?? `${project.name} screenshot`}
               className="absolute top-[12%] left-1/2 z-[1] w-[31%] -translate-x-1/2 transition-transform duration-700 group-hover:-translate-y-3"
             />
           </div>
